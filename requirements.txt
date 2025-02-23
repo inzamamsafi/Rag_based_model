@@ -1,0 +1,10 @@
+fitz
+numpy
+sentence-transformers
+transformers
+torch
+chromadb
+requests
+frontend
+tools
+google-generativeai
