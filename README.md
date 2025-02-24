@@ -52,4 +52,5 @@ This will start the Streamlit app in your default web browser.
 3. Click the "Submit" button.
 4. The app will process your question and display the answer.
 
-## Note: The embeding of the pdf is persisted. In case if it does not exist then first time when user will ask question then embeding and indexing will happen and it will take some time. But from 2nd time onward it will work with good speed and embeding and indexing won't happen.
+## Note: 
+The embeding of the pdf is persisted. In case if it does not exist then first time when user will ask question then embeding and indexing will happen and it will take some time. But from 2nd time onward it will work with good speed and embeding and indexing won't happen.
