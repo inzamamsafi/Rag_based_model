@@ -25,13 +25,13 @@ Install the required Python packages using `pip`.
 
 ### 4. Set Up Environment Variables
 
-Create a `.env` file in the root directory of the project and add the necessary environment variables. For example: 
+Create a `.env` file in the root directory of the project and put the variable name as mentioned below
 GEMINI_API_KEY=your_gemini_api_key_here
 
 
 ### 5. Run the FastAPI Backend
 
-Start the FastAPI backend server:
+Start the FastAPI backend server
 
 Run this command: uvicorn app:app --reload
 
