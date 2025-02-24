@@ -10,7 +10,9 @@ import pickle
 from transformers import CLIPProcessor, CLIPModel
 
 # Configure Gemini API
-GEMINI_API_KEY = "AIzaSyANVmZMHBPVIyEmX29g1qHuJhRdbQT_cUE"  # Replace with your actual Gemini API key
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # Read from .env file
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY is not set in the environment variables")
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Create the Gemini model
@@ -34,7 +36,7 @@ clip_model = CLIPModel.from_pretrained(clip_model_name)
 
 # Function to convert PDF to images
 def pdf_to_images(pdf_path):
-    images = convert_from_path(pdf_path, dpi = 600)
+    images = convert_from_path(pdf_path)
     return images
 
 # Function to generate question embedding using CLIP
@@ -52,7 +54,7 @@ def generate_image_embedding(image):
     return embedding
 
 # Function to store embeddings and FAISS index to disk
-def save_embeddings_and_index(embeddings, faiss_index, save_dir="data"):
+def save_embeddings_and_index(embeddings, faiss_index, save_dir="embedding"):
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
     
@@ -64,7 +66,7 @@ def save_embeddings_and_index(embeddings, faiss_index, save_dir="data"):
     faiss.write_index(faiss_index, os.path.join(save_dir, "faiss_index.index"))
 
 # Function to load embeddings and FAISS index from disk
-def load_embeddings_and_index(save_dir="data"):
+def load_embeddings_and_index(save_dir="embedding"):
     embeddings_path = os.path.join(save_dir, "embeddings.pkl")
     faiss_index_path = os.path.join(save_dir, "faiss_index.index")
     
@@ -125,7 +127,7 @@ class QuestionRequest(BaseModel):
 async def ask_question(request: QuestionRequest):
     try:
         # Step 1: Check if embeddings and FAISS index already exist
-        save_dir = "data"
+        save_dir = "embedding"
         embeddings, faiss_index = load_embeddings_and_index(save_dir)
         
         if embeddings is None or faiss_index is None:

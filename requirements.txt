@@ -8,3 +8,4 @@ requests
 frontend
 tools
 google-generativeai
+python-dotenv
