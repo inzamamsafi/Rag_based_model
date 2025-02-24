@@ -9,3 +9,11 @@ frontend
 tools
 google-generativeai
 python-dotenv
+uvicorn
+fastapi
+pydantic
+Pillow
+faiss-cpu
+typing-extensions
+streamlit
+pdf2image
